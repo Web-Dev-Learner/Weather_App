@@ -1,7 +1,9 @@
+
 import{ View, Text, StyleSheet, Button, TextInput}from 'react-native'
 import React from 'react'
 import Constants from 'expo-constants'
 import { useState } from 'react'
+
 // Apikey b5563401497d4e4dbda81654242303
 
 
@@ -30,8 +32,14 @@ const Weather =() =>{
                 <Text style={styles.headerTitle}>Weather App</Text>
                 
             </View>
-            <View>
+
+            <View style={styles.inputContainer}>
+            
                 <TextInput 
+
+                style={styles.input}
+
+
                 placeholder="Enter a city"
                 value={
                     loc
@@ -41,7 +49,7 @@ const Weather =() =>{
                 }
                 
                 />
-                <Button title = "click" onPress={()=>handleLocation()}/>
+                <Button title = "search" onPress={()=>handleLocation()}/>
                
             </View>
 
@@ -56,14 +64,14 @@ export default Weather
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor:'#ee82ee',
+      backgroundColor:'#3c3c3c',
       paddingTop:Constants.statusBarHeight,
      
 
     },
     header:{
         alignItems:'center',
-        backgroundColor:'#C5D2EF',
+        backgroundColor:'#6a5acd',
         height:80,
         justifyContent:'center',
         
@@ -71,8 +79,38 @@ const styles = StyleSheet.create({
     headerTitle:{
         fontSize:29,
         fontWeight:'bold',
-    }
+        
+       
+    },
+
+   // inputContainer to style the box contain TextInput & Button
+   // input style is for TextInput to customize or align 
+   
+    inputContainer: {
+        backgroundColor: '#fff',
+        padding: 10,
+        margin: 20,
+        borderRadius: 10,
+        flexDirection: 'row',
+        alignItems: 'center',
+        
+    },
+    input: {
+        flex: 1,
+        marginRight: 10,
+        paddingVertical: 8,
+        paddingHorizontal: 15,
+        backgroundColor: '#f0f0f0',
+        borderRadius: 5,
+        fontSize: 16,
+       
+        
+        
+    },
+    
+    
+});
+
 
 
    
-});

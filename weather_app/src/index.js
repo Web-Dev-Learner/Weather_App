@@ -52,9 +52,9 @@ const Weather =() =>{
                 <Button title = "search" onPress={()=>handleLocation()}/>
                
             </View>
-
-
-            
+            <View>
+                //sridevi's Section
+            </View>
         </View>
     )
 }

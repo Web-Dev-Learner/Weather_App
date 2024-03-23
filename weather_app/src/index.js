@@ -44,9 +44,9 @@ const Weather =() =>{
                 <Button title = "click" onPress={()=>handleLocation()}/>
                
             </View>
-
-
-            
+            <View>
+                //sridevi's Section
+            </View>
         </View>
     )
 }

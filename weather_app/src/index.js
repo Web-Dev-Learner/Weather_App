@@ -1,32 +1,56 @@
 
-import{ View, Text, StyleSheet, Button, TextInput}from 'react-native'
+import{ View, Text, StyleSheet, Button, TextInput,Image}from 'react-native'
 import React from 'react'
 import Constants from 'expo-constants'
-import { useState } from 'react'
+import { useState,useRef ,useEffect} from 'react';
+import Temp from "./Temp.svg";
+import wind from "./wind.svg";
+import humidity from "./humidity.svg";
+import clock from "./clock.svg";
+import { SvgUri } from 'react-native-svg';
 
-// Apikey b5563401497d4e4dbda81654242303
+
 
 
 const Weather =() =>{
-    const [loc,setLoc]=useState("London");
-
+    const [loc,setLoc]=useState("london");
+    const [wdata,setWdata]=useState({});
+    
+    let action=useRef(false);
+    useEffect(()=>{
+        if (action.current==false){
+            initialData();
+            action.current=true;
+        }
+    },[wdata]);
+    async function initialData(){
+        const response=await fetch(`https://api.weatherapi.com/v1/current.json?key=b5563401497d4e4dbda81654242303&q=london`,{mode:"cors"});
+        let data=await response.json()
+        setWdata(data);
+       
+        
+        
+        
+    }
+    
+    
 
     async function apiData(){
         const response=await fetch(`https://api.weatherapi.com/v1/current.json?key=b5563401497d4e4dbda81654242303&q=${loc}`,{mode:"cors"});
-        const Wdata=await response.json();
-        console.log(Wdata);
-    
-    }
-    const handleLocation =()=>{
-        console.log(`loction ${loc}`);
-        //we are going to get the value of text input
-        //value=> apiData(value)
-        apiData();
+        let data=await response.json()
+        setWdata(data);
+        
 
+    
     }
-    
-    
-    return(
+    //<Image style={{width: 50, height: 50}} source={temp} />
+    function render_content(){
+        if (action.current ==true){
+            
+            let last_update=wdata.current.last_updated.split(" ");
+            let last_time_updated=last_update[1];
+           
+        return(
         <View style={styles.container}>
             <View style={styles.header}>
                 <Text style={styles.headerTitle}>Weather App</Text>
@@ -49,11 +73,51 @@ const Weather =() =>{
                 }
                 
                 />
-                <Button title = "search" onPress={()=>handleLocation()}/>
+
+                <Button title = "click" onPress={()=>apiData()}/>
+
+             
                
             </View>
+<<<<<<< HEAD
            
+=======
+            <View>
+                <View>
+                    <Text>{wdata.location.name}</Text>
+                    <Text>{wdata.location.country}</Text>
+                </View>
+                <View>
+                <Image  style={{width: 50, height: 50}} source={{uri:`http:${wdata.current.condition.icon}` }}/>
+                </View>
+                <View>
+                    <View>
+                    <Text>{wdata.current.temp_c}</Text>
+                    <Image source={Temp}/>
+                    </View>
+                    <Text>{wdata.current.condition.text}</Text>
+                </View>
+            </View>
+
+            <View>
+                <View>
+                    <Image source={wind}/>
+                    <Text>{wdata.current.wind_kph}</Text></View>
+                <View>
+                <Image source={humidity}/>
+                    <Text>{wdata.current.humidity}</Text></View>
+                <View> 
+                <Image source={clock}/>
+                    <Text>{last_time_updated}</Text>  </View>  
+            </View>
+>>>>>>> d560a884cfb80f78e61188936498a5f7e94f3080
         </View>
+        )
+            }
+    }
+    
+    return(
+        render_content()
     )
 }
 

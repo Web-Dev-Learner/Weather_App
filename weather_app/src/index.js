@@ -1,4 +1,4 @@
-import{ View, Text, StyleSheet, Button, TextInput,Image}from 'react-native'
+import{ View, Text, StyleSheet, Button, TextInput,Image,TouchableOpacity}from 'react-native'
 import React from 'react'
 import Constants from 'expo-constants'
 import { useState,useRef ,useEffect} from 'react';
@@ -7,7 +7,7 @@ import wind from "./wind.svg";
 import humidity from "./humidity.svg";
 import clock from "./clock.svg";
 import { SvgUri } from 'react-native-svg';
-
+import {MagnifyingGlassIcon} from "C:\Users\ELCOT\Weather_App\weather_app\node_modules\@heroicons\react\outline";
 //import { View,Button, ScrollView,Image, TextInput } from 'react-native'
 // Apikey b5563401497d4e4dbda81654242303
 
@@ -44,6 +44,7 @@ const Weather =() =>{
     
     }
     //<Image style={{width: 50, height: 50}} source={temp} />
+    //<Button title = "click" onPress={()=>apiData()}/>
     function render_content(){
         if (action.current ==true){
             
@@ -56,8 +57,9 @@ const Weather =() =>{
                 <Text style={styles.headerTitle}>Weather App</Text>
                 
             </View>
-            <View>
+            <View style={styles.inputContainer}>
                 <TextInput 
+                style={styles.input}
                 placeholder="Enter a city"
                 value={
                     loc
@@ -67,19 +69,22 @@ const Weather =() =>{
                 }
                 
                 />
-                <Button title = "click" onPress={()=>apiData()}/>
+                
+                <TouchableOpacity style={styles.button} onPress={()=>apiData()}>
+                <MagnifyingGlassIcon size="24" color="white"/>
+                </TouchableOpacity>
                
             </View>
-            <View>
-                <View>
+            <View style={styles.middle}>
+                <View style={styles.cityInfo}>
                     <Text>{wdata.location.name}</Text>
                     <Text>{wdata.location.country}</Text>
                 </View>
                 <View>
                 <Image  style={{width: 50, height: 50}} source={{uri:`http:${wdata.current.condition.icon}` }}/>
                 </View>
-                <View>
-                    <View>
+                <View style={styles.wInfo}>
+                    <View style={styles.bind}>
                     <Text>{wdata.current.temp_c}</Text>
                     <Image source={Temp}/>
                     </View>
@@ -87,16 +92,19 @@ const Weather =() =>{
                 </View>
             </View>
 
-            <View>
-                <View>
+            <View style={styles.footer}>
+                <View style={styles.bind}>
                     <Image source={wind}/>
-                    <Text>{wdata.current.wind_kph}</Text></View>
-                <View>
-                <Image source={humidity}/>
-                    <Text>{wdata.current.humidity}</Text></View>
-                <View> 
-                <Image source={clock}/>
-                    <Text>{last_time_updated}</Text>  </View>  
+                    <Text>{wdata.current.wind_kph}</Text>
+                </View>
+                <View style={styles.bind}>
+                    <Image source={humidity}/>
+                    <Text>{wdata.current.humidity}</Text>
+                </View>
+                <View style={styles.bind}> 
+                    <Image source={clock}/>
+                    <Text>{last_time_updated}</Text>  
+                </View>  
             </View>
         </View>
         )
@@ -112,23 +120,70 @@ export default Weather
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      backgroundColor:'#ee82ee',
-      paddingTop:Constants.statusBarHeight,
+        flex: 1,
+        backgroundColor:'#3c3c3c',
+        paddingTop:Constants.statusBarHeight,
+       
+  
+      },
+      header:{
+          alignItems:'center',
+          backgroundColor:'#6a5acd',
+          height:80,
+          justifyContent:'center',
+          
+      },
+      headerTitle:{
+          fontSize:29,
+          fontWeight:'bold',
+          
+         
+      },
+  
+     // inputContainer to style the box contain TextInput & Button
+     // input style is for TextInput to customize or align 
      
+      inputContainer: {
+          backgroundColor: '#fff',
+          padding: 10,
+          margin: 20,
+          borderRadius: 10,
+          flexDirection: 'row',
+          alignItems: 'center',
+          
+      },
+      input: {
+          flex: 1,
+          marginRight: 10,
+          paddingVertical: 8,
+          paddingHorizontal: 15,
+          backgroundColor: '#f0f0f0',
+          borderRadius: 5,
+          fontSize: 16,
+         
+          
+          
+      },
+      button:{
+          backgroundColor:"gray",
+      },
+      middle:{
+        flex: 0,
 
-    },
-    header:{
-        alignItems:'center',
-        backgroundColor:'#C5D2EF',
-        height:80,
-        justifyContent:'center',
-        
-    },
-    headerTitle:{
-        fontSize:29,
-        fontWeight:'bold',
-    }
+      },
+      cityInfo:{
+          flex:1,
+
+      },
+      wInfo:{
+          flex:0,
+      },
+      bind:{
+          flex:1,
+      },
+      footer:{
+          flex:1,
+      }
 
 
    

@@ -1,4 +1,9 @@
+
 import{ View, Text, StyleSheet, Button, TextInput,Image,TouchableOpacity}from 'react-native'
+
+
+import{ View, Text, StyleSheet, Button, TextInput,Image}from 'react-native'
+
 import React from 'react'
 import Constants from 'expo-constants'
 import { useState,useRef ,useEffect} from 'react';
@@ -7,9 +12,13 @@ import wind from "./wind.svg";
 import humidity from "./humidity.svg";
 import clock from "./clock.svg";
 import { SvgUri } from 'react-native-svg';
+
 import {MagnifyingGlassIcon} from "C:\Users\ELCOT\Weather_App\weather_app\node_modules\@heroicons\react\outline";
 //import { View,Button, ScrollView,Image, TextInput } from 'react-native'
 // Apikey b5563401497d4e4dbda81654242303
+
+
+
 
 
 const Weather =() =>{
@@ -57,9 +66,20 @@ const Weather =() =>{
                 <Text style={styles.headerTitle}>Weather App</Text>
                 
             </View>
+
             <View style={styles.inputContainer}>
                 <TextInput 
                 style={styles.input}
+
+
+            <View style={styles.inputContainer}>
+            
+                <TextInput 
+
+                style={styles.input}
+
+
+
                 placeholder="Enter a city"
                 value={
                     loc
@@ -69,6 +89,7 @@ const Weather =() =>{
                 }
                 
                 />
+
                 
                 <TouchableOpacity style={styles.button} onPress={()=>apiData()}>
                 <MagnifyingGlassIcon size="24" color="white"/>
@@ -77,6 +98,19 @@ const Weather =() =>{
             </View>
             <View style={styles.middle}>
                 <View style={styles.cityInfo}>
+
+
+                <Button title = "click" onPress={()=>apiData()}/>
+
+             
+               
+            </View>
+
+           
+
+            <View>
+                <View>
+
                     <Text>{wdata.location.name}</Text>
                     <Text>{wdata.location.country}</Text>
                 </View>
@@ -106,6 +140,7 @@ const Weather =() =>{
                     <Text>{last_time_updated}</Text>  
                 </View>  
             </View>
+
         </View>
         )
             }
@@ -120,6 +155,7 @@ export default Weather
 
 const styles = StyleSheet.create({
     container: {
+
         flex: 1,
         backgroundColor:'#3c3c3c',
         paddingTop:Constants.statusBarHeight,
@@ -142,6 +178,11 @@ const styles = StyleSheet.create({
   
      // inputContainer to style the box contain TextInput & Button
      // input style is for TextInput to customize or align 
+
+      flex: 1,
+      backgroundColor:'#3c3c3c',
+      paddingTop:Constants.statusBarHeight,
+
      
       inputContainer: {
           backgroundColor: '#fff',
@@ -170,6 +211,7 @@ const styles = StyleSheet.create({
       middle:{
         flex: 0,
 
+
       },
       cityInfo:{
           flex:1,
@@ -185,6 +227,49 @@ const styles = StyleSheet.create({
           flex:1,
       }
 
+    },
+    header:{
+        alignItems:'center',
+        backgroundColor:'#6a5acd',
+        height:80,
+        justifyContent:'center',
+        
+    },
+    headerTitle:{
+        fontSize:29,
+        fontWeight:'bold',
+        
+       
+    },
+
+   // inputContainer to style the box contain TextInput & Button
+   // input style is for TextInput to customize or align 
+   
+    inputContainer: {
+        backgroundColor: '#fff',
+        padding: 10,
+        margin: 20,
+        borderRadius: 10,
+        flexDirection: 'row',
+        alignItems: 'center',
+        
+    },
+    input: {
+        flex: 1,
+        marginRight: 10,
+        paddingVertical: 8,
+        paddingHorizontal: 15,
+        backgroundColor: '#f0f0f0',
+        borderRadius: 5,
+        fontSize: 16,
+       
+        
+        
+    },
+    
+    
+});
+
+
 
    
-});

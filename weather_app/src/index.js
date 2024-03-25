@@ -35,14 +35,7 @@ const Weather =() =>{
     
     
 
-    async function apiData(){
-        const response=await fetch(`https://api.weatherapi.com/v1/current.json?key=b5563401497d4e4dbda81654242303&q=${loc}`,{mode:"cors"});
-        let data=await response.json()
-        setWdata(data);
-        
-
     
-    }
     //<Image style={{width: 50, height: 50}} source={temp} />
     function render_content(){
         if (action.current ==true){
@@ -79,9 +72,9 @@ const Weather =() =>{
              
                
             </View>
-<<<<<<< HEAD
+
            
-=======
+
             <View>
                 <View>
                     <Text>{wdata.location.name}</Text>
@@ -110,7 +103,7 @@ const Weather =() =>{
                 <Image source={clock}/>
                     <Text>{last_time_updated}</Text>  </View>  
             </View>
->>>>>>> d560a884cfb80f78e61188936498a5f7e94f3080
+
         </View>
         )
             }
